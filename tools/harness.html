@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="local-fonts.css">
+<style>body{margin:0;background:#222;color:#ddd;font:12px sans-serif}.row{display:flex;gap:6px;padding:6px}canvas{height:auto;display:block}figure{margin:0}figcaption{padding:2px}</style>
+</head><body><div id="out"></div>
+<script src="engine.iife.js"></script>
+<script>
+window.runGrid = async function(ids, opts={}) {
+  const E = SurfaceEngine;
+  await E.loadFonts(E.allFontFamilies(), [40]);
+  const out = document.getElementById('out'); out.innerHTML='';
+  const text = opts.text || "The best ideas don't arrive all at once. They accumulate, quietly, while you're busy doing something else.";
+  const errors = [];
+  for (const id of ids) {
+    const row = document.createElement('div'); row.className='row'; out.appendChild(row);
+    const s = E.getSurface(id);
+    const vars = E.planVariations(id, opts.seed||1);
+    for (const v of vars.filter(v=>!opts.recipes||opts.recipes.includes(v.recipe))) {
+      try {
+        const t0=performance.now();
+        const r = E.render({ width: 540, height: 675, quality: 1, surfaceId: id, treatmentId: opts.treatment || s.treatments[0], text, variation: v, emphasis: { phrase: opts.em || 'accumulate' } });
+        const f = document.createElement('figure');
+        r.canvas.style.width=(opts.cw||270)+'px';
+        f.appendChild(r.canvas);
+        const c=document.createElement('figcaption'); c.textContent = `${id} · ${v.recipe} · ${Math.round(performance.now()-t0)}ms fs${Math.round(r.info.fontSize)}x${r.info.lines}${r.info.tooLong?' · LONG':''}`; f.appendChild(c);
+        row.appendChild(f);
+      } catch (e) { errors.push(id+':'+v.recipe+': '+e.message+' '+(e.stack||'').split('\n')[1]); }
+    }
+  }
+  return errors;
+};
+</script></body></html>

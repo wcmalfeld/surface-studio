@@ -1,0 +1,7 @@
+{
+  "name": "@surface-studio/prototype",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "node build.mjs" },
+  "dependencies": { "@surface-studio/engine": "0.1.0", "@surface-studio/studio": "0.1.0" }
+}

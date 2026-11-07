@@ -1,0 +1,8 @@
+{
+  "name": "@surface-studio/engine",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": { ".": "./src/index.js" },
+  "sideEffects": false
+}

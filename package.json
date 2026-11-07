@@ -1,0 +1,14 @@
+{
+  "name": "surface-studio",
+  "private": true,
+  "workspaces": ["packages/*", "apps/*"],
+  "scripts": {
+    "test": "node --test packages/engine/test/*.test.js",
+    "build:prototype": "node apps/prototype/build.mjs",
+    "dev:web": "npm run dev -w apps/web",
+    "build:web": "npm run build -w apps/web"
+  },
+  "devDependencies": {
+    "esbuild": "0.24.2"
+  }
+}

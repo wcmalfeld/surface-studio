@@ -1,0 +1,14 @@
+node_modules/
+.next/
+dist/
+data/
+*.db
+*.db-wal
+*.db-shm
+.env
+.env.local
+tools/node_modules/
+tools/engine.iife.js
+tools/local-fonts.css
+apps/web/next-env.d.ts
+apps/web/tsconfig.tsbuildinfo

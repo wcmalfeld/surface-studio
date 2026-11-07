@@ -1,0 +1,4 @@
+html, body { height: 100%; margin: 0; }
+body { background: var(--ss-bg); padding: env(safe-area-inset-top, 0) 0 env(safe-area-inset-bottom, 0); }
+#studio-root { height: 100%; }
+@media (max-width: 960px) { #studio-root { height: auto; min-height: 100%; } }
